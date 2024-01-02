@@ -1,2 +1,2 @@
-rootProject.name = "web-table-filtering"
+rootProject.name = "spec-resolver-spring-boot-starter"
 
