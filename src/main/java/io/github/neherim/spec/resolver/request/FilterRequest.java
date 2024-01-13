@@ -17,12 +17,39 @@ public class FilterRequest {
         this.converter = converter;
     }
 
+    /**
+     * Get parameter value from http request
+     *
+     * @param name  parameter name from the http request
+     * @param clazz type to convert parameter value to
+     * @return parameter value
+     */
     @Nullable
     public <T> T getParameter(String name, Class<T> clazz) {
         var value = getFirstParamValue(name);
         return convertValue(value, clazz);
     }
 
+    /**
+     * <p>Get the list of parameter values from http request.
+     * Examples:</p>
+     *
+     * <p>/search?str=A,B,C</p>
+     * <pre>
+     * getParameterList("str", ",", String.class) = ["A", "B", "C"]
+     * getParameterList("str", null, String.class) = ["A,B,C"]
+     * </pre>
+     * <p>/search?str=A&str=B&str=C,D</p>
+     * <pre>
+     * getParameterList("str", null, String.class) = ["A", "B", "C,D"]
+     * getParameterList("str", ",", String.class) = ["A", "B", "C", "D"]
+     * </pre>
+     *
+     * @param name      parameter name from the http request
+     * @param separator parameter value separator
+     * @param clazz     type to convert parameter value to
+     * @return parameter values
+     */
     public <T> List<T> getParameterList(String name, String separator, Class<T> clazz) {
         if (separator == null) {
             return getMultiParamValue(name, clazz);
