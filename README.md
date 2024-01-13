@@ -57,7 +57,7 @@ public static class UserController {
 And the standard Spring Data Jpa repository interface for User entity:
 
 ```java
-public interface UserRepository extends JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 }
 ```
 

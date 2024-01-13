@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,7 +61,7 @@ public class SwaggerFilterOperationCustomizerTest extends BaseContextTest {
         }
     }
 
-    public interface EmployeeRepository extends JpaSpecificationExecutor<Employee> {
+    public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSpecificationExecutor<Employee> {
     }
 
     @RestController
